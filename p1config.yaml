@@ -1,0 +1,9 @@
+configuration:
+    cookie:
+      id: 'P1USB'
+    source:
+      device: '/dev/ttyUSB0'
+    #   file: 'belgian-meter-output.txt' # Uncomment to use file input for testing
+    # mqtt: # See https://www.home-assistant.io/docs/mqtt/broker/ for options
+    #   username: emonpi
+    #   password: emonpimqtt2016
