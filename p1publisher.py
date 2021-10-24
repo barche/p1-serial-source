@@ -89,6 +89,8 @@ def processMeterStream(istream):
         line = istream.readline()
         if not line:
             return ''
+        if isinstance(line, bytes):
+            line = line.decode('utf-8')
         if line.startswith('/'):
             telegram = line
             continue
