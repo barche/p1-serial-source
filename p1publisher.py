@@ -114,6 +114,7 @@ Meant to keep running as a service, until killed by UNIX kill command
 #Nooooo you can't just import me as a module in your program nooooo
 if __name__ == '__main__':
     killer = GracefulDeath()
+    counter = 0
     with opensource(source) as istream:
         while not killer.kill_now:
             try:
@@ -125,9 +126,12 @@ if __name__ == '__main__':
                     message['value'] = telegram
                     message['unit'] = None
                     message['timestamp'] = round(time.time())
-                    client.loop_start()
-                    client.publish(topic,json.dumps(message))
-                    client.loop_stop()
+                    counter += 1
+                    if counter == 10:
+                        client.loop_start()
+                        client.publish(topic,json.dumps(message))
+                        client.loop_stop()
+                        counter = 0
             except KeyboardInterrupt:
                 print("Disconnecting from broker... ", end='')
                 client.disconnect()
